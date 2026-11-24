@@ -1,0 +1,25 @@
+
+name: Monglithe Virtual PC
+
+on:
+  workflow_dispatch:
+
+jobs:
+  virtual-pc:
+    runs-on: windows-latest
+    timeout-minutes: 360
+
+    steps:
+      - name: Install Tailscale
+        uses: tailscale/github-action@v3
+        with:
+          authkey: ${{ secrets.TAILSCALE_AUTHKEY }}
+
+      - name: Show connection information
+        shell: pwsh
+        run: |
+          Write-Host "Monglithe Virtual PC iniciado"
+          tailscale status
+          Write-Host "Computador temporário iniciado."
+          Start-Sleep -Secon
+          ds 60
